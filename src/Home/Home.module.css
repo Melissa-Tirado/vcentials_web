@@ -141,3 +141,12 @@ button:disabled {
     background-color: #f44336;
     color: white;
 }
+
+.printButton {
+    padding: 5px 10px;  
+    font-size: 14px;    
+    max-width: 120px;   
+    width: auto;        
+    text-align: center; 
+    display: inline-block; 
+}
