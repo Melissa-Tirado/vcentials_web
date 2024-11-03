@@ -3,9 +3,7 @@ import React, { useState, useRef } from 'react';
 import styles from './Metrics.module.css';
 import { PolarArea, Bar } from 'react-chartjs-2';
 import NavBar from '../NavBar/NavBar.jsx';
-// usage of importing Chart.js library components for chart functionality on the metrics page
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 import {
     Chart as ChartJS,
     RadialLinearScale,
@@ -36,49 +34,6 @@ function Metrics() {
         setMenuActive(!menuActive);
     };
 
-    // Function to handle print
-    const handlePrint = () => {
-        const contentToPrint = printRef.current;
-        const printWindow = window.open('', '', 'width=800,height=600');
-        printWindow.document.write(`
-            <html>
-                <head>
-                    <title>Print Preview</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                    </style>
-                </head>
-                <body>${contentToPrint.innerHTML}</body>
-            </html>
-        `);
-        printWindow.document.close();
-        printWindow.focus();
-        printWindow.print();
-        printWindow.close();
-    };
-
-    // Function to save as PDF
-    const handleSavePDF = () => {
-        const contentToPrint = printRef.current;
-        html2canvas(contentToPrint).then(canvas => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, 'PNG', 0, 0);
-            pdf.save('download.pdf');
-        });
-    };
-
-    // Function to save as JPG
-    const handleSaveJPG = () => {
-        const contentToPrint = printRef.current;
-        html2canvas(contentToPrint).then(canvas => {
-            const imgData = canvas.toDataURL('image/jpeg');
-            const link = document.createElement('a');
-            link.href = imgData;
-            link.download = 'download.jpg';
-            link.click();
-        });
-    };
 
     // Fake data for the charts
     const polarData = {
@@ -125,11 +80,7 @@ function Metrics() {
                     </div>
 
                     
-                    <div className={styles.buttonContainer}>
-                        <button onClick={handlePrint}>Print Page</button>
-                        <button onClick={handleSavePDF}>Save as PDF</button>
-                        <button onClick={handleSaveJPG}>Save as JPG</button>
-                    </div>
+
 
                     <div className={styles.cardBox}>
                         {[
