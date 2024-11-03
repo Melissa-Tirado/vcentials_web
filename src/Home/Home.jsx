@@ -35,6 +35,7 @@ function Home() {
     // toggles boolean admin view to true for now, until backend is finished to show record deletion
     const [isAdmin, setIsAdmin] = useState(true); //true to show working webpage
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const printRef = useRef(); // Reference for the print content
 
     // useEffect hook used to perform fetching records
     useEffect(() => {
@@ -103,14 +104,41 @@ function Home() {
         setDeleteDialogOpen(false); // closes the delete confirmation dialog
     };
 
+    // Handle print action
+    const handlePrint = () => {
+        const contentToPrint = printRef.current;
+        const printWindow = window.open('', '', 'width=800,height=600');
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Print Preview</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        table { width: 100%; border-collapse: collapse; }
+                        th, td { border: 1px solid #ddd; padding: 8px; }
+                        th { background-color: #f2f2f2; }
+                    </style>
+                </head>
+                <body>
+                    ${contentToPrint.innerHTML}
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+    };
+
     return (
 
 
         <>
         <NavBar/>
         <div className={styles.homePageView}>
-            <div className={styles.splitLayout}>
-                <div className={styles.gridWrapper}>
+            <button onClick={handlePrint} className={styles.printButton}>Print Records</button>            <div className={styles.splitLayout}>
+                 <div className={styles.splitLayout}>
+                    <div className={styles.gridWrapper} ref={printRef}>
                     <table className={styles.recordGrid}>
 
                         <thead>
