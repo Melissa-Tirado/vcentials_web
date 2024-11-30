@@ -8,6 +8,7 @@
 .splitLayout {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap; /* Ensures the layout wraps on smaller screens */
 }
 
 .gridWrapper {
@@ -140,4 +141,61 @@ button:disabled {
 .confirmDialog button:last-child {
     background-color: #f44336;
     color: white;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .splitLayout {
+        flex-direction: column; /* Stack the elements vertically */
+        gap: 10px; /* Reduce space between elements */
+    }
+
+    .formLayout {
+        grid-template-columns: 1fr; /* Make form inputs stack in one column */
+    }
+
+    .buttonLayout {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center;
+    }
+
+    .recordGrid th, .recordGrid td {
+        padding: 8px; /* Reduce padding for smaller screens */
+    }
+
+    .recordGrid {
+        font-size: 14px; /* Adjust font size for better readability on mobile */
+    }
+
+    .confirmDialog {
+        width: 90%; /* Make confirmation dialog wider on mobile */
+    }
+
+    .editorLayout {
+        padding: 15px; /* Reduce padding in editor layout on mobile */
+    }
+
+    button {
+        font-size: 12px; /* Adjust button font size for mobile */
+        padding: 8px 12px; /* Adjust button size for mobile */
+    }
+
+    .gridWrapper {
+        overflow-x: visible; /* Allow overflow to be visible on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    button {
+        font-size: 10px; /* Smaller font size for very small screens */
+        padding: 6px 10px; /* Adjust padding for very small screens */
+    }
+
+    .recordGrid th, .recordGrid td {
+        font-size: 12px; /* Smaller font size for table on small screens */
+    }
+
+    .splitLayout {
+        gap: 5px; /* Reduce the gap even further for very small screens */
+    }
 }
