@@ -97,6 +97,16 @@ function Home() {
     setDeleteDialogOpen(false);
   };
 
+  const handlePrint = () => {
+    const printContent = document.getElementById("printableContent");
+    const printWindow = window.open("", "_blank");
+    printWindow.document.write('<html><head><title>Temperature Records</title></head><body>');
+    printWindow.document.write(printContent.innerHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+  };
+  
   return (
     <>
     <NavBar/>
