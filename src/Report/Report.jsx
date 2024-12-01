@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../NavBar/NavBar.jsx'
-//import styles from './Report.module.css'; Add custom styling if needed
+// import NavBar from '../NavBar/NavBar.jsx'; // Removed NavBar import
+
+
 
 export function Report() {
   const [records, setRecords] = useState([]);
@@ -17,7 +18,7 @@ export function Report() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch or simulate data here (e.g., from an API or hardcoded values)
+    // Fetch data here
     const fetchData = async () => {
       const data = [
         { date: '2024-10-21', time: '10:00 AM', machine: 'Freezer A', temp: -5, room: 'Room 101', roomTemp: 70, location: 'West Campus', username: 'User1' },
@@ -53,29 +54,39 @@ export function Report() {
   };
   
   return (
-    <>
-    <NavBar/>
-    <div className="report">
-      <h2 className="report-title">Report View</h2>
+      <div className="report">
+        <h2 
+        className="report-title"
+        style={{
+          marginTop: '20px',
+          textAlign: 'center',
+          fontSize: '24px', 
+          fontWeight: 'bold'
+        }}
+      >
+        Report View
+      </h2>
+
       <div className="controls">
-        <label className="checkbox-label">
+        <label className="checkbox-label" style={{ marginRight: '10px'}}>
           <input type="checkbox" checked={sortEnabled} onChange={handleSortChange} /> Sort by Date
         </label>
-        <label className="checkbox-label">
+        <label className="checkbox-label" style={{ marginRight: '10px'}}>
           <input type="checkbox" checked={groupEnabled} onChange={handleGroupChange} /> Group by Criteria
         </label>
-        <div className="date-picker">
-          <label className="date-label">
+        <div className="date-picker" style={{ marginTop: '20px'}}>
+          <label className="date-label" style={{ marginRight: '10px', marginBottom: '10px'}}>
             Start Date:
-            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="date-input" />
+            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="date-input" 
+            />
           </label>
-          <label className="date-label">
+          <label className="date-label" style={{ marginRight: '10px'}}>
             End Date:
             <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="date-input" />
           </label>
         </div>
-        <div className="location-picker">
-          <label className="location-label">
+        <div className="location-picker" style={{marginTop: '20px'}}>
+          <label className="location-label" style={{marginBotton: '10px', marginRight: '10px'}}>
             Location:
             <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)} className="location-select">
               <option value="">All Locations</option>
@@ -85,19 +96,19 @@ export function Report() {
             </select>
           </label>
         </div>
-        <div className="room-picker">
+        <div className="room-picker" style={{marginTop: '10px'}}>
           <label className="room-label">
             Room:
             <input type="text" value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)} placeholder="Enter room number" className="room-input" />
           </label>
         </div>
-        <div className="machine-picker">
+        <div className="machine-picker" style={{ marginTop: '10px'}}>
           <label className="machine-label">
             Machine:
             <input type="text" value={selectedMachine} onChange={(e) => setSelectedMachine(e.target.value)} placeholder="Enter machine type" className="machine-input" />
           </label>
         </div>
-        <div className="username-picker">
+        <div className="username-picker" style={{ marginTop: '10px'}}>
           <label className="username-label">
             Username:
             <input type="text" value={selectedUsername} onChange={(e) => setSelectedUsername(e.target.value)} placeholder="Enter username" className="username-input" />
@@ -105,12 +116,12 @@ export function Report() {
         </div>
       </div>
       <div className="record-count">
-        <h3 className="record-count-title">Number of Records: {filteredRecords.length}</h3>
+        <h3 className="record-count-title" style={{ marginTop: '20px', fontsize: '24px'}}>Number of Records: {filteredRecords.length}</h3>
       </div>
       <button onClick={handleGenerateReport} className="generate-report-button">Generate Report</button>
     </div>
-    </>
   );
 };
 
 export default Report;
+
